@@ -1,24 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
-  <base href="$FLUTTER_BASE_HREF">
+  <base href="/">
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="description" content="Qual é a Boa? - Encontre os melhores lugares para curtir">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
@@ -32,41 +20,61 @@
   <title>Qual é a Boa?</title>
   <link rel="manifest" href="manifest.json">
 
-  <!-- Configurando os tipos MIME corretos -->
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  
-  <script>
-    // Corrigindo problemas de roteamento para Single Page Applications
-    window.flutterWebRenderer = "html";
-  </script>
+  <style>
+    body {
+      background-color: #0175C2;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: white;
+      text-align: center;
+    }
+    .loading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .loading img {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 20px;
+    }
+    .loading p {
+      font-size: 18px;
+      margin-top: 8px;
+    }
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top: 4px solid white;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
 </head>
 <body>
-  <!-- Carregando o Flutter de forma correta -->
-  <script>
-    // Definindo o tipo MIME correto para os scripts
-    var serviceWorkerVersion = null;
-    var scriptLoaded = false;
-    function loadMainDartJs() {
-      if (scriptLoaded) {
-        return;
-      }
-      scriptLoaded = true;
-      var scriptTag = document.createElement('script');
-      scriptTag.src = 'main.dart.js';
-      scriptTag.type = 'application/javascript';
-      document.body.appendChild(scriptTag);
-    }
+  <div class="loading">
+    <div class="spinner"></div>
+    <p>Os melhores rolês na palma da sua mão</p>
+  </div>
 
-    if ('serviceWorker' in navigator) {
-      // Service workers não são suportados em alguns ambientes
-      window.addEventListener('load', function () {
-        navigator.serviceWorker.register('flutter_service_worker.js');
-      });
-    }
-    
-    window.addEventListener('load', function(ev) {
-      // Download main.dart.js
-      loadMainDartJs();
+  <script>
+    window.addEventListener('load', function() {
+      // Carregar o script principal
+      var script = document.createElement('script');
+      script.src = 'main.dart.js';
+      script.type = 'application/javascript';
+      document.body.appendChild(script);
     });
   </script>
 </body>
