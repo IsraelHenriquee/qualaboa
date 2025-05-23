@@ -18,21 +18,56 @@
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+  <meta name="description" content="Qual é a Boa? - Encontre os melhores lugares para curtir">
 
   <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="meu_app_flutter">
+  <meta name="apple-mobile-web-app-title" content="Qual é a Boa?">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png"/>
 
-  <title>meu_app_flutter</title>
+  <title>Qual é a Boa?</title>
   <link rel="manifest" href="manifest.json">
+
+  <!-- Configurando os tipos MIME corretos -->
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <script>
+    // Corrigindo problemas de roteamento para Single Page Applications
+    window.flutterWebRenderer = "html";
+  </script>
 </head>
 <body>
-  <script src="flutter_bootstrap.js" async></script>
+  <!-- Carregando o Flutter de forma correta -->
+  <script>
+    // Definindo o tipo MIME correto para os scripts
+    var serviceWorkerVersion = null;
+    var scriptLoaded = false;
+    function loadMainDartJs() {
+      if (scriptLoaded) {
+        return;
+      }
+      scriptLoaded = true;
+      var scriptTag = document.createElement('script');
+      scriptTag.src = 'main.dart.js';
+      scriptTag.type = 'application/javascript';
+      document.body.appendChild(scriptTag);
+    }
+
+    if ('serviceWorker' in navigator) {
+      // Service workers não são suportados em alguns ambientes
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('flutter_service_worker.js');
+      });
+    }
+    
+    window.addEventListener('load', function(ev) {
+      // Download main.dart.js
+      loadMainDartJs();
+    });
+  </script>
 </body>
 </html>
